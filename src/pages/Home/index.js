@@ -1,6 +1,6 @@
 import React from "react";
-import Page from "../../components/global/Page";
-import { H1, H2 } from "../../components/global/Headers";
+import Page from "../../components/Page";
+import { H1, H2 } from "../../components/Headers";
 
 const HomePage = props => {
   const goTo = route => {
