@@ -1,8 +1,13 @@
-import styled from "styled-components";
+import React from "react";
+import { NavBar, NavLink } from "./NavBarStyled";
 
-const NavBar = styled.div`
-  height: 35px;
-  background-color: ${props => props.theme.primary};
-`;
+const NavBarContainer = () => {
+  return (
+    <NavBar>
+      <NavLink to={"/log-in"}>Log In</NavLink>
+      <NavLink to={"/sign-up"}>Sign Up</NavLink>
+    </NavBar>
+  );
+};
 
-export default NavBar;
+export default NavBarContainer;

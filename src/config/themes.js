@@ -1,11 +1,13 @@
-const light = {
-  primary: "white",
-  secondary: "black"
+const lightTheme = {
+  primary: "#FFFFFF",
+  secondary: "#000000",
+  hover: "#F7F7F7"
 };
 
-const dark = {
-  primary: "black",
-  secondary: "white"
+const darkTheme = {
+  primary: "#000000",
+  secondary: "#FFFFFF",
+  hover: "#F7F7F7"
 };
 
-export { light, dark };
+export { lightTheme, darkTheme };

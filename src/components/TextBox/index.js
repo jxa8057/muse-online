@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import React from "react";
+import TextBox from "./TextBoxStyled";
 
-const TextBox = styled.input`
-  width: 100%;
-  font-size: 18px;
-`;
+const TextBoxContainer = props => {
+  const { placeholder } = props;
+  return <TextBox placeholder={placeholder} />;
+};
 
-export default TextBox;
+export default TextBoxContainer;

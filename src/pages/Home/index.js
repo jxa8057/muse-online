@@ -10,8 +10,6 @@ const HomePage = props => {
   return (
     <Page>
       <H1>Welcome</H1>
-      <H2 onClick={() => goTo("/log-in")}>Log In</H2>
-      <H2 onClick={() => goTo("/sign-up")}>Sign Up</H2>
     </Page>
   );
 };
