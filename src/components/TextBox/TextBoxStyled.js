@@ -5,7 +5,7 @@ const TextBox = styled.input`
   border: none;
   border-radius: 2px;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   padding: 8px;
   font-size: 18px;
 `;

@@ -1,39 +1,50 @@
-import React, { useState } from "react";
-import Page from "./../../components/Page";
-import Card from "./../../components/Card";
-import TextBox from "./../../components/TextBox";
-import Button from "./../../components/Button";
-import { H2 } from "./../../components/Headers";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Page, Card, Headers, TextBox, Button, Link } from "./../../components";
+const { H2 } = Headers;
 
 const LogIn = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Email address is invalid")
+        .required("Email address is required"),
+      password: Yup.string().required("Password is required")
+    }),
+    onSubmit: values => logIn(values)
+  });
 
-  const handleTextChange = e => {
-    const { name: fieldName, value } = e.target;
-    if (fieldName === "username") setUsername(value);
-    if (fieldName === "password") setPassword(value);
+  const logIn = values => {
+    console.log(values);
   };
-
-  const logIn = () => {};
+  const forgotPassword = () => {};
 
   return (
     <Page>
-      <Card>
+      <Card size="small">
         <H2>Log In</H2>
-        <TextBox
-          placeholder="Username"
-          value={username}
-          name="username"
-          onChange={handleTextChange}
-        />
-        <TextBox
-          placeholder="Password"
-          value={password}
-          name="password"
-          onChange={handleTextChange}
-        />
-        <Button onClick={logIn}>Log In</Button>
+        <form>
+          <TextBox
+            placeholder="Email Address"
+            value={formik.values.email}
+            name="email"
+            onChange={formik.handleChange}
+          />
+          <TextBox
+            placeholder="Password"
+            value={formik.values.password}
+            name="password"
+            onChange={formik.handleChange}
+            type="password"
+          />
+          <Button onClick={logIn}>Log In</Button>
+        </form>
+        <Link onClick={forgotPassword}>Forgot your password?</Link>
       </Card>
     </Page>
   );

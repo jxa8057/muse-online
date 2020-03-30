@@ -1,9 +1,14 @@
 import React from "react";
 import TextBox from "./TextBoxStyled";
+import ErrorMessage from "../ErrorMessage/ErrorMessageStyled";
 
-const TextBoxContainer = props => {
-  const { placeholder } = props;
-  return <TextBox placeholder={placeholder} />;
+const TextBoxContainer = ({ errorMessage, ...otherProps }) => {
+  return (
+    <>
+      <TextBox {...otherProps} />
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </>
+  );
 };
 
 export default TextBoxContainer;
