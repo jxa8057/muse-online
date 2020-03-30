@@ -7,7 +7,7 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 16px;
-  height: ${props => {
+  min-height: ${props => {
     if (props.size === "small") return "300px";
     if (props.size === "medium") return "500px";
     if (props.size === "large") return "700px";

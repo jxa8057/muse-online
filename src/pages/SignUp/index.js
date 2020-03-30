@@ -3,13 +3,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { FirebaseContext } from "./../../config/firebase";
-import Page from "./../../components/Page";
-import Card from "./../../components/Card";
-import TextBox from "./../../components/TextBox";
-import Button from "./../../components/Button";
-import { H2 } from "./../../components/Headers";
+import { Page, Card, TextBox, Button, Headers } from "./../../components";
+const { H2 } = Headers;
 
-const SignUp = () => {
+const SignUp = props => {
   const firebase = useContext(FirebaseContext);
   const formik = useFormik({
     initialValues: {
@@ -21,7 +18,9 @@ const SignUp = () => {
       email: Yup.string()
         .email("Invalid email address")
         .required("Email address is required"),
-      password: Yup.string().required("Please enter a password"),
+      password: Yup.string()
+        .min(8, "Password must be at least 8 characters.")
+        .required("Please enter a password"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), ""], "Passwords don't match.")
         .required("Confirm your password")
@@ -29,8 +28,23 @@ const SignUp = () => {
     onSubmit: values => signUp(values)
   });
 
-  const signUp = values => {
+  const signUp = async values => {
+    const { email, password } = values;
+
+    try {
+      await firebase.createUser(email, password);
+      props.history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+
     console.log(values);
+  };
+
+  const getErrorMessageForField = fieldName => {
+    if (formik.errors[fieldName] && formik.touched[fieldName])
+      return formik.errors[fieldName];
+    return null;
   };
 
   return (
@@ -43,6 +57,8 @@ const SignUp = () => {
             onChange={formik.handleChange}
             name="email"
             placeholder="Email Address"
+            autoComplete="email"
+            errorMessage={getErrorMessageForField("email")}
           />
           <TextBox
             value={formik.values.password}
@@ -50,6 +66,8 @@ const SignUp = () => {
             name="password"
             placeholder="Password"
             type="password"
+            autoComplete="new-password"
+            errorMessage={getErrorMessageForField("password")}
           />
           <TextBox
             value={formik.values.confirmPassword}
@@ -57,8 +75,10 @@ const SignUp = () => {
             name="confirmPassword"
             placeholder="Confirm Password"
             type="password"
+            autoComplete="new-password"
+            errorMessage={getErrorMessageForField("confirmPassword")}
           />
-          <Button onClick={signUp} type="submit">
+          <Button disabled={formik.errors.length} type="submit">
             Sign Up
           </Button>
         </form>
