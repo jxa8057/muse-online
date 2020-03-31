@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { FirebaseContext } from "../../config/firebase";
 import { Page, Card, Headers, TextBox, Button, Link } from "./../../components";
 const { H2 } = Headers;
 
-const LogIn = () => {
+const LogIn = props => {
+  const firebase = useContext(FirebaseContext);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -19,21 +21,38 @@ const LogIn = () => {
     onSubmit: values => logIn(values)
   });
 
-  const logIn = values => {
-    console.log(values);
+  const logIn = async values => {
+    const { email, password } = values;
+    try {
+      console.log(email);
+      console.log(password);
+      const authUser = await firebase.signIn(email, password);
+      console.log(authUser);
+      props.history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const forgotPassword = () => {};
+
+  const getErrorMessageForField = fieldName => {
+    if (formik.errors[fieldName] && formik.touched[fieldName])
+      return formik.errors[fieldName];
+    return null;
+  };
 
   return (
     <Page>
       <Card size="small">
         <H2>Log In</H2>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <TextBox
             placeholder="Email Address"
             value={formik.values.email}
             name="email"
             onChange={formik.handleChange}
+            autoComplete="current-username"
+            errorMessage={getErrorMessageForField("email")}
           />
           <TextBox
             placeholder="Password"
@@ -41,6 +60,8 @@ const LogIn = () => {
             name="password"
             onChange={formik.handleChange}
             type="password"
+            autoComplete="current-password"
+            errorMessage={getErrorMessageForField("password")}
           />
           <Button onClick={logIn}>Log In</Button>
         </form>

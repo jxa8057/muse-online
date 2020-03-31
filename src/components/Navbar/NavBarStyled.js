@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const NavBar = styled.div`
   display: flex;
@@ -11,7 +10,7 @@ const NavBar = styled.div`
   color: ${props => props.theme.secondary};
 `;
 
-const NavLink = styled(Link)`
+const NavLink = styled.div`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -21,6 +20,7 @@ const NavLink = styled(Link)`
   color: ${props => props.theme.secondary};
   letter-spacing: 3px;
   font-weight: 100;
+  cursor: pointer;
   &:hover {
     background-color: ${props => props.theme.hover};
   }

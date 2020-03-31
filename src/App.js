@@ -17,8 +17,7 @@ const App = () => {
   return (
     <ThemeProvider theme={activeTheme}>
       <Router>
-        <NavBar />
-
+        <Route component={NavBar} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/sign-up" component={SignUp} />
