@@ -24,10 +24,7 @@ const LogIn = props => {
   const logIn = async values => {
     const { email, password } = values;
     try {
-      console.log(email);
-      console.log(password);
-      const authUser = await firebase.signIn(email, password);
-      console.log(authUser);
+      await firebase.signIn(email, password);
       props.history.push("/");
     } catch (error) {
       console.log(error);
@@ -63,7 +60,7 @@ const LogIn = props => {
             autoComplete="current-password"
             errorMessage={getErrorMessageForField("password")}
           />
-          <Button onClick={logIn}>Log In</Button>
+          <Button type="submit">Log In</Button>
         </form>
         <Link onClick={forgotPassword}>Forgot your password?</Link>
       </Card>

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FirebaseContext } from "./../../config/firebase";
 import { NavBar, NavLink } from "./NavBarStyled";
 import SignOutButton from "./SignOutButton";
 
 const NavBarContainer = props => {
-  return (
+  const firebase = useContext(FirebaseContext);
+  const { currentUser } = firebase.auth;
+
+  const authorizedNav = (
+    <NavBar>
+      <NavLink as={Link} to={"/"}>
+        Home
+      </NavLink>
+      <SignOutButton history={props.history} />
+    </NavBar>
+  );
+
+  const unauthorizedNav = (
     <NavBar>
       <NavLink as={Link} to={"/"}>
         Home
@@ -15,9 +28,11 @@ const NavBarContainer = props => {
       <NavLink as={Link} to={"/sign-up"}>
         Sign Up
       </NavLink>
-      <SignOutButton history={props.history} />
     </NavBar>
   );
+
+  if (!currentUser) return unauthorizedNav;
+  return authorizedNav;
 };
 
 export default NavBarContainer;
