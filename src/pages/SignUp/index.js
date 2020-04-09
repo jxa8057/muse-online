@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { getErrorMessageForField } from "../../utils";
 import { FirebaseContext } from "./../../config/firebase";
 import { Page, Card, TextBox, Button, Headers } from "./../../components";
 const { H2 } = Headers;
@@ -41,12 +42,6 @@ const SignUp = props => {
     console.log(values);
   };
 
-  const getErrorMessageForField = fieldName => {
-    if (formik.errors[fieldName] && formik.touched[fieldName])
-      return formik.errors[fieldName];
-    return null;
-  };
-
   return (
     <Page>
       <Card size="small">
@@ -58,7 +53,7 @@ const SignUp = props => {
             name="email"
             placeholder="Email Address"
             autoComplete="email"
-            errorMessage={getErrorMessageForField("email")}
+            errorMessage={getErrorMessageForField("email", formik)}
           />
           <TextBox
             value={formik.values.password}
@@ -67,7 +62,7 @@ const SignUp = props => {
             placeholder="Password"
             type="password"
             autoComplete="new-password"
-            errorMessage={getErrorMessageForField("password")}
+            errorMessage={getErrorMessageForField("password", formik)}
           />
           <TextBox
             value={formik.values.confirmPassword}
@@ -76,7 +71,7 @@ const SignUp = props => {
             placeholder="Confirm Password"
             type="password"
             autoComplete="new-password"
-            errorMessage={getErrorMessageForField("confirmPassword")}
+            errorMessage={getErrorMessageForField("confirmPassword", formik)}
           />
           <Button disabled={formik.errors.length} type="submit">
             Sign Up

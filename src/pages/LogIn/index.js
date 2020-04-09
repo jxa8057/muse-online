@@ -2,7 +2,15 @@ import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FirebaseContext } from "../../config/firebase";
-import { Page, Card, Headers, TextBox, Button, Link } from "./../../components";
+import {
+  Page,
+  Card,
+  Headers,
+  TextBox,
+  Button,
+  Link,
+  Modal
+} from "./../../components";
 const { H2 } = Headers;
 
 const LogIn = props => {
@@ -30,7 +38,10 @@ const LogIn = props => {
       console.log(error);
     }
   };
-  const forgotPassword = () => {};
+
+  const forgotPassword = () => {
+    props.history.push("/forgot-password");
+  };
 
   const getErrorMessageForField = fieldName => {
     if (formik.errors[fieldName] && formik.touched[fieldName])
