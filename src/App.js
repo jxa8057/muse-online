@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
-import { Home, SignUp, LogIn, ForgotPassword, ResetPassword } from "./pages";
+import {
+  Home,
+  SignUp,
+  LogIn,
+  ForgotPassword,
+  ResetPassword,
+  UploadFile
+} from "./pages";
 import NavBar from "./components/Navbar";
 import { lightTheme, darkTheme } from "./config/themes";
 
@@ -24,6 +31,7 @@ const App = () => {
           <Route path="/log-in" component={LogIn} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password" component={ResetPassword} />
+          <Route path="/upload-file" component={UploadFile} />
         </Switch>
       </Router>
     </ThemeProvider>
