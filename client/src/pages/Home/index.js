@@ -1,9 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import { FirebaseContext } from "./../../config/firebase";
-import { Page, Headers } from "../../components";
+import { testRoute } from "./../../utils/APIManager";
+import { Page, Headers, Button } from "../../components";
 const { H1 } = Headers;
 
-const HomePage = props => {
+const HomePage = (props) => {
   const firebase = useContext(FirebaseContext);
   const { currentUser } = firebase.auth;
 
@@ -18,6 +19,7 @@ const HomePage = props => {
       ) : (
         <H1>Welcome, please log in or sign up</H1>
       )}
+      <Button onClick={testRoute}>Test</Button>
     </Page>
   );
 };
