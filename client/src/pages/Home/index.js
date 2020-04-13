@@ -3,7 +3,7 @@ import { FirebaseContext } from "./../../config/firebase";
 import { Page, Headers } from "../../components";
 const { H1 } = Headers;
 
-const HomePage = props => {
+const HomePage = (props) => {
   const firebase = useContext(FirebaseContext);
   const { currentUser } = firebase.auth;
 
