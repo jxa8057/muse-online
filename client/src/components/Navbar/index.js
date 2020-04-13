@@ -4,7 +4,7 @@ import { FirebaseContext } from "./../../config/firebase";
 import { NavBar, NavLink } from "./NavBarStyled";
 import SignOutButton from "./SignOutButton";
 
-const NavBarContainer = props => {
+const NavBarContainer = (props) => {
   const firebase = useContext(FirebaseContext);
   const { currentUser } = firebase.auth;
 
@@ -12,6 +12,9 @@ const NavBarContainer = props => {
     <NavBar>
       <NavLink as={Link} to={"/"}>
         Home
+      </NavLink>
+      <NavLink as={Link} to={"/upload-file"}>
+        Upload
       </NavLink>
       <SignOutButton history={props.history} />
     </NavBar>

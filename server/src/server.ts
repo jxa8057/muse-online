@@ -1,5 +1,8 @@
+import dotenv from "dotenv";
 import Express from "express";
 import bodyParser from "body-parser";
+
+dotenv.config({ path: ".env.development.local" });
 
 const app = Express();
 const port = process.env.port || 3001;
