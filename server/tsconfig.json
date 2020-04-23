@@ -1,17 +1,18 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es6",
-    "noImplicitAny": true,
+    "allowJs": true, // also this... why does this break everything :'(
+    "noImplicitAny": false, // would like to turn this back on once i understand typescript
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "build",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
-    },
-    "types": ["node"]
+    }
   },
   "include": ["src/**/*"]
 }

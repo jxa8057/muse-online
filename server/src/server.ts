@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 import Express from "express";
 import bodyParser from "body-parser";
 
+import routes from "./routes";
+
 dotenv.config({ path: ".env.development.local" });
 
 const app = Express();
@@ -14,14 +16,8 @@ app.use(
   })
 );
 
-app.get("/api/test", (req, res) => {
-  res.json({ testing: true });
-});
-
-app.post("/api/posttest", (req, res) => {
-  console.log(req.body);
-  res.json({ whatYouSent: req.body.post });
-});
+/** API Routes */
+app.use("/api", routes);
 
 app.listen(port, () =>
   console.log(`Server started and listening on port ${port}`)
